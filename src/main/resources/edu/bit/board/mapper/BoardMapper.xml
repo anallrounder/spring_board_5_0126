@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.bit.board.mapper.BoardMapper">
+	<!--namespace 해당인터페이스의 경로  -->
+	
+	<!-- 자손을 xml로 구현함 getList() 가 id로 와서 구현함 resultType이 <BoradVO>인것 -->
+   <select id="getList" resultType="edu.bit.board.vo.BoardVO">
+   <![CDATA[
+      select * from mvc_board order by bGroup desc, bStep asc 
+   ]]>
+  		 <!-- 세미콜론빼고 <![CDATA...]]>도 넣어주자.  -->
+   </select>
+   
+   
+   <insert id="insert">
+   <![CDATA[
+   	insert into mvc_board (bId, bName, bTitle, bContent, bHit, bGroup, bStep, bIndent) values (mvc_board_seq.nextval, #{bName}, #{bTitle}, #{bContent}, 0, mvc_board_seq.currval, 0, 0)
+   ]]>
+   </insert>
+   <!-- #{} 변수로 넘어오는거에대해  #{bName} - 변수명.bname으로 넘어옴 함수 getBName()호출 -->
+
+</mapper>
+
+
