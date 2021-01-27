@@ -24,14 +24,56 @@ public class BoardServiceImpl implements BoardService {	//자손이 구현
 	// 우리는 5.0.7?버전? 씀??
 	@Override
 	public List<BoardVO> getList() {
+		log.info("get all List completed");
 		// TODO Auto-generated method stub
 		return mapper.getList();  //이거만 일단 추가하자
 	}
 
 	@Override
 	public void writeBoard(BoardVO boardVO) {
+		log.info("insert completed");
 		mapper.insert(boardVO); //여기 객체를 넣고있다.
 		// 리턴값 없어서 안함
 	}
+
+	@Override
+	public BoardVO getBoard(int bno) {
+		log.info("getBoard.......");
+		return mapper.read(bno);
+	}
+
+	@Override
+	public void deleteBoard(int bno) {
+		log.info("deleteBoard completed");
+		mapper.delete(bno); //리턴 안하고 실행만하는거다.
 		
+	}
+
+	@Override
+	public void modifyBoard(BoardVO boardVO) {
+		log.info("modify completed");
+		mapper.modify(boardVO); 
+	}
+	
+	@Override
+	public BoardVO getReplyBoard(int bno) {
+		log.info("getReplyBoard!!");
+		return mapper.redayReply(bno);
+	}
+
+	@Override
+	public void replyBoard(BoardVO boardVO) {
+		log.info("reply completed");
+		mapper.reply(boardVO);
+	}
+
+	@Override
+	public void upHit(BoardVO boardVO) {
+		log.info("upHit completed");
+		mapper.hitUpdate(boardVO);
+		
+	}
+
+	
+
 }

@@ -9,7 +9,7 @@
 <body>
 
 	<table width="500" cellpadding="0" cellspacing="0" border="1">
-		<form action="write.do" method="post">  <!-- 수정 -->
+		<form action="write" method="post">  <!-- 수정 -->
 			<tr>
 				<td> 이름 </td>
 				<td> <input type="text" name="bName" size = "50"> </td>
