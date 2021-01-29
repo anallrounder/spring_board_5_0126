@@ -13,7 +13,9 @@ public interface BoardMapper { //dao부분 - 맵퍼로 사용 (신세계. 이제
 	public void delete(int bno);
 	public void modify(BoardVO boardVO);
 	public BoardVO redayReply(int bno);
-	public void reply(BoardVO boardVO);
+	//public void reply(BoardVO boardVO);
 	public void hitUpdate(BoardVO boardVO);
+	public void updateShape(BoardVO boardVO);
+	public void insertReply(BoardVO boardVO);
 	
 }  

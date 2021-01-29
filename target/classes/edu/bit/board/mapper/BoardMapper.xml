@@ -26,7 +26,7 @@
 	<!-- 내용 보기 -->
 	<select id="read" resultType="edu.bit.board.vo.BoardVO">
    <![CDATA[
-		select * from mvc_board where bId = #{bno}
+		select * from mvc_board where bId = #{bno} 
    ]]>
 	</select>
 
@@ -52,12 +52,29 @@
 	</select>
 
 	<!-- 댓글달기 -->
-	<update id="reply">
+<!-- 	<update id="reply">
    <![CDATA[
 		insert into mvc_board (bId, bName, bTitle, bContent, bGroup, bStep, bIndent) 
 		values (mvc_board_seq.nextval, #{bName},#{bTitle}, #{bContent}, #{bGroup}, #{bStep}+1, #{bIndent}+1)
    ]]>
-	</update>
+	</update> -->
+	<!-- 한개 이상 객체 불러올때 이게 생략된거라는걸 기억하자 #{boardVO.bGroup} -->
+	
+	<!-- 위에걸 아래처럼 사용할 수있다. -->
+	
+	<!-- updateShape & insertReply -->
+	  <update id="updateShape" >
+   <![CDATA[
+      update mvc_board set bStep = bStep + 1 where bGroup = #{bGroup}
+   ]]>
+   </update>
+   
+   <insert id="insertReply" >
+   <![CDATA[
+      insert into mvc_board (bId, bName, bTitle, bContent, bGroup, bStep, bIndent) 
+      values (mvc_board_seq.nextval, #{bName}, #{bTitle},#{bContent}, #{bGroup}, #{bStep}+1, #{bIndent}+1)
+   ]]>
+   </insert>
 	
 	<update id="hitUpdate">
    <![CDATA[

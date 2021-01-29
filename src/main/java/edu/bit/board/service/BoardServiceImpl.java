@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.bit.board.mapper.BoardMapper;
 import edu.bit.board.vo.BoardVO;
@@ -25,7 +26,6 @@ public class BoardServiceImpl implements BoardService {	//자손이 구현
 	@Override
 	public List<BoardVO> getList() {
 		log.info("get all List completed");
-		// TODO Auto-generated method stub
 		return mapper.getList();  //이거만 일단 추가하자
 	}
 
@@ -60,11 +60,20 @@ public class BoardServiceImpl implements BoardService {	//자손이 구현
 		log.info("getReplyBoard!!");
 		return mapper.redayReply(bno);
 	}
-
+	
+	@Transactional
 	@Override
-	public void replyBoard(BoardVO boardVO) {
+	public void replyBoard(BoardVO boardVO) { //writeReply
 		log.info("reply completed");
-		mapper.reply(boardVO);
+		//mapper.reply(boardVO);
+		
+		// sql문을 따로 작성해서 만들 수 있다. 
+		// (컨트롤러에서는 반드시 하나로 작성을하고 서비스든 어디든에서 두개로 나눠지는게 핵심이다.)
+		// 컨트롤러에는 복잡하게 표현하면 안되고, 여기서 비지니스 로직을 표현해야한다.
+		// 컨트롤러에서는 뷰정도만 보여줘야한다. 그래야 나중에 트랜잭션배울때 
+		// -> 이거 붙이는데가 서비스여야지 컨트롤러면 안된다. (@Transactional)
+		mapper.updateShape(boardVO);
+		mapper.insertReply(boardVO);
 	}
 
 	@Override

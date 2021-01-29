@@ -36,22 +36,21 @@ public class BoardController {
 	}
 
 	@GetMapping("/write_view")
-	public void write_view(Model model) {
+	public void write_view(Model model) throws Exception  {
 		log.info("write_view");
 	}
 
 	@PostMapping("/write")
-	public String write(BoardVO boardVO, Model model) { // 왠만하면 커맨드객체로 받아내자.
-		log.info("write_view");
+	public String write(BoardVO boardVO, Model model) throws Exception  { // 왠만하면 커맨드객체로 받아내자.
+		log.info("write");
 
 		boardService.writeBoard(boardVO);
 
 		return "redirect:list";
 	}
 	
-
 	@GetMapping("/content_view")
-	public String content_view(BoardVO boardVO, Model model) { // 왠만하면 커맨드객체로 받아내자.
+	public String content_view(BoardVO boardVO, Model model) throws Exception { // 왠만하면 커맨드객체로 받아내자.
 		log.info("content_view");
 
 		boardService.upHit(boardVO);//
@@ -61,7 +60,7 @@ public class BoardController {
 	}
 
 	@GetMapping("/delete")
-	public String delete(BoardVO boardVO, Model model) {
+	public String delete(BoardVO boardVO, Model model) throws Exception  {
 		log.info("delete");
 
 		boardService.deleteBoard(boardVO.getbId());
@@ -69,7 +68,7 @@ public class BoardController {
 	}
 
 	@PostMapping("/modify")
-	public String modify(BoardVO boardVO, Model model) {
+	public String modify(BoardVO boardVO, Model model) throws Exception  {
 		log.info("modify");
 
 		boardService.modifyBoard(boardVO);
@@ -77,16 +76,16 @@ public class BoardController {
 	}
 
 	@GetMapping("/reply_view")
-	public String reply_view(BoardVO boardVO, Model model) { // 왠만하면 커맨드객체로 받아내자.
-		log.info("reply_view");
+	public String reply_view(BoardVO boardVO, Model model) throws Exception { 
+		log.info("reply_view()");
 
 		model.addAttribute("reply_view", boardService.getReplyBoard(boardVO.getbId()));
 		return "reply_view";
 	}
 
 	@PostMapping("/reply")
-	public String reply(BoardVO boardVO, Model model) {
-		log.info("reply");
+	public String reply(BoardVO boardVO, Model model) throws Exception {
+		log.info("reply"); //writeReply
 
 		boardService.replyBoard(boardVO);
 		return "redirect:list";
